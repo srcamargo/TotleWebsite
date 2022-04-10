@@ -5,27 +5,12 @@ def choices():
     print("""
     1. Add a new record
     2. Edit a record
-    3. Delete a record
-    4. Search for a record
-    5. Show all records
-    6. Quit
+    3. Edit a location
+    4. Delete a record
+    5. Search for a record
+    6. Show all records
+    7. Quit
     """)
-
-def view_data():
-    with open(fileName, "r") as f:
-        data = json.load(f)
-        #print(data)
-        i = 0
-        for entry in data:
-            location    = entry["location"]
-            name        = entry["name"]
-            workstation = entry["workstation"]
-            print (f"Index number: {i}")
-            print (f"Location: {location}")
-            print (f"Name: {name}")
-            print (f"Workstation: {workstation}")
-            print("\n")
-            i += 1
 
 def delete_data():
     view_data()
@@ -57,6 +42,21 @@ def add_data():
     with open(fileName, "w") as f:
         json.dump(data, f, indent = 4)
 
+def view_data():
+    with open(fileName, "r") as f:
+        data = json.load(f)
+        #print(data)
+        i = 0
+        for entry in data:
+            location    = entry["location"]
+            name        = entry["name"]
+            workstation = entry["workstation"]
+            print (f"Index number: {i}")
+            print (f"Location: {location}")
+            print (f"Name: {name}")
+            print (f"Workstation: {workstation}")
+            print("\n")
+            i += 1
 
 def edit_data():
     view_data()
@@ -83,6 +83,33 @@ def edit_data():
     with open(fileName, "w") as f:
         json.dump(new_data, f, indent = 4)
 
+def edit_location():
+    view_data()
+    new_data = []
+    with open(fileName, "r") as f:
+        data = json.load(f)
+        data_length = len(data)-1
+    print("Enter the location number of the record you want to edit: ")
+    edit_option = (input(f"Type the location id: "))
+    i = 0
+    for entry in data:
+        #if i == int(edit_option):
+        if entry["location"] == edit_option:
+            location                = input("Enter the new location: ") or entry["location"]
+            name                    = input("Enter the new name: ") or entry["name"]
+            workstation             = input("Enter the new workstation name: ") or entry["workstation"]
+            entry["location"]       = location
+            entry["name"]           = name
+            entry["workstation"]    = workstation
+            new_data.append(entry)
+            i += 1
+        else:
+            new_data.append(entry)
+            i += 1
+    with open(fileName, "w") as f:
+        json.dump(new_data, f, indent = 4)
+
+
 while True:
     choices()
     option = int(input("\nSelect an option: "))
@@ -91,10 +118,12 @@ while True:
     elif option == 2:
         edit_data()     # Edit a record
     elif option == 3:
-        delete_data()   # Delete a record
+        edit_location()     # Edit a record
     elif option == 4:
-        view_data()     # Search for a record
+        delete_data()   # Delete a record
     elif option == 5:
-        view_data()     # Show all records
+        view_data()     # Search for a record
     elif option == 6:
+        view_data()     # Show all records
+    elif option == 7:
         break
