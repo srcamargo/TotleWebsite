@@ -1,0 +1,22 @@
+[
+    {
+        "location": "707A70",
+        "name": "Jane Doe",
+        "workstation": "WKS1700007"
+    },
+    {
+        "location": "777A07",
+        "name": "John Doe",
+        "workstation": "WKS7077770"
+    },
+    {
+        "location": "770B73",
+        "name": "Johnny Cash",
+        "workstation": "WKS7177777"
+    },
+    {
+        "location": "770B72",
+        "name": "George Michael",
+        "workstation": "WKS7700001"
+    }
+]
